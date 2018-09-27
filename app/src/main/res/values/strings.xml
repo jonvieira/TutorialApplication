@@ -11,4 +11,18 @@
     <string name="target_not_view">0</string>
     <string name="target_view">1</string>
     <string name="help">Help</string>
+    <string name="battery">Battery</string>
+    <string name="image_trash">Image Trash</string>
+    <string name="junk">Junk</string>
+    <string name="over_mb">435 MB over</string>
+    <string name="image_rocket">image rocket</string>
+    <string name="boost">Boost</string>
+    <string name="app_over">4 App over</string>
+    <string name="image_battery">image battery</string>
+    <string name="percent_over">43% over</string>
+    <string name="image_ad_trash">image ad trash</string>
+    <string name="image_deep_clean">image deep clean</string>
+    <string name="delete_unnecessary_files">Delete unnecessary files</string>
+    <string name="speed_up_phone">Speed up phone by clearing trash</string>
+    <string name="developer_name">Jonas Vieira</string>
 </resources>

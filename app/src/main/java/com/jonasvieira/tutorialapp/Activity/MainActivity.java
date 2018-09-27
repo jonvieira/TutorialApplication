@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.croller)
     Croller croller;
 
+    @BindView(R.id.cardJunk)
+    CardView cardJunk;
+    @BindView(R.id.cardBoost)
+    CardView cardBoost;
+    @BindView(R.id.cardBattery)
+    CardView cardBattery;
+    @BindView(R.id.cardAdTrash)
+    CardView cardAdTrash;
+    @BindView(R.id.cardDeepClean)
+    CardView cardDeepClean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -50,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show());
+        fab.setOnClickListener(view -> Snackbar.make(view, "Dados atualizados", Snackbar.LENGTH_LONG).setAction("Action", null).show());
 
         croller.setOnProgressChangedListener(progress -> croller.setLabel(progress + "%"));
 
@@ -93,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_favorite) {
+        if (id == R.id.action_help) {
             showTargetView();
             return true;
         }
@@ -104,7 +118,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showTargetView() {
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
-                        TapTarget.forView(croller, "teste 1", "teste 1")
+                        TapTarget.forToolbarMenuItem(toolbar, R.id.action_help, "Bem-vindo!", "Mostraremos um breve tutorial sobre nosso sistema, você pode rever se precisar de ajuda")
+                                .outerCircleColor(R.color.colorAccent)
+                                .targetCircleColor(R.color.colorWhite)
+                                .transparentTarget(true)
+                                .titleTextSize(24)
+                                .descriptionTextSize(18)
+                                .descriptionTextColor(R.color.colorWhite)
+                                .textColor(android.R.color.white),
+                        TapTarget.forView(croller, "Medidor de desempenho!", "Aqui você pode ver o quanto podemos te ajudar!")
                                 .outerCircleColor(R.color.colorAccent)
                                 .outerCircleAlpha(.95f)
                                 .targetCircleColor(R.color.colorWhite)
@@ -119,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .transparentTarget(true)
                                 .targetRadius(60)
                         ,
-                        TapTarget.forView(fab, "teste 2", "teste 2")
+                        TapTarget.forView(cardJunk, "Lixo inteligente", "Remova arquivos desnecessários e libere espaço!")
                                 .outerCircleColor(R.color.colorAccent)
                                 .outerCircleAlpha(.95f)
                                 .targetCircleColor(R.color.colorWhite)
@@ -133,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .cancelable(false)
                                 .transparentTarget(true)
                                 .targetRadius(60),
-                        TapTarget.forView(toolbar, "teste 3", "teste 3")
+                        TapTarget.forView(cardBoost, "Boost App", "Feche aplicativos em segundo plano que estão ocupando memória!")
                                 .outerCircleColor(R.color.colorAccent)
                                 .outerCircleAlpha(.95f)
                                 .targetCircleColor(R.color.colorWhite)
@@ -147,7 +169,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .cancelable(false)
                                 .transparentTarget(true)
                                 .targetRadius(60),
-                        TapTarget.forView(croller, "teste 4", "teste 4")
+                        TapTarget.forView(cardBattery, "Nível de bateria", "Turbine a performance da bateria do seu smartphone!")
+                                .outerCircleColor(R.color.colorAccent)
+                                .outerCircleAlpha(.95f)
+                                .targetCircleColor(R.color.colorWhite)
+                                .titleTextSize(24)
+                                .titleTextColor(R.color.colorWhite)
+                                .descriptionTextSize(18)
+                                .descriptionTextColor(R.color.colorWhite)
+                                .textColor(R.color.colorWhite)
+                                .textTypeface(Typeface.SANS_SERIF)
+                                .drawShadow(true)
+                                .cancelable(false)
+                                .transparentTarget(true)
+                                .targetRadius(60),
+                        TapTarget.forView(fab, "Atualize", "Obtenha os dados atualizados")
                                 .outerCircleColor(R.color.colorAccent)
                                 .outerCircleAlpha(.95f)
                                 .targetCircleColor(R.color.colorWhite)
